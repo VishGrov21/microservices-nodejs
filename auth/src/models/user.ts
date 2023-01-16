@@ -1,6 +1,11 @@
 import mongoose, { version } from "mongoose";
 import { Password } from "../services/password";
 
+// Three interfaces are required while creating a model using TS
+// 1. Attributes Interface
+// 2. Document Interface
+// 3. Model Interface
+
 // An interface describes the properties to create a new user
 interface userAttributes {
   email: string;

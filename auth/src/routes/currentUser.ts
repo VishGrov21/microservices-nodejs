@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { currentUser } from "../middlewares/current-user";
-import { requireAuth } from "../middlewares/require-auth";
+import { currentUser } from "@vg_node_micro_service_app/common";
+import { requireAuth } from "@vg_node_micro_service_app/common";
 
 const router = express.Router();
 

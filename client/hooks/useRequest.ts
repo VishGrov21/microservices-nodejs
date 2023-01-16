@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 export interface ErrorObj {
   field: string;
@@ -21,7 +21,7 @@ export interface UseRequestI {
 const useRequest = ({ url, method, body, onSuccess }: UseRequestI): [() => Promise<any>, ErrorArr] => {
   const [errorsArr, setErrorsArr] = useState<ErrorArr>([]);
 
-  const doRequest = async () => {
+  const doRequest = useCallback(async () => {
     try {
       setErrorsArr([]);
       const response = await axios[method](url, body);
@@ -34,7 +34,7 @@ const useRequest = ({ url, method, body, onSuccess }: UseRequestI): [() => Promi
       const data = typedErr.response?.data as AxiosErrorData;
       setErrorsArr(data.errors);
     }
-  };
+  }, [body, method, onSuccess, url]);
   return [doRequest, errorsArr];
 };
 

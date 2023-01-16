@@ -7,8 +7,8 @@ import { currentUserRouter } from "./routes/currentUser";
 import { signInRouter } from "./routes/signIn";
 import { signUpRouter } from "./routes/signUp";
 import { signOutRouter } from "./routes/signOut";
-import { errorHandler } from "./middlewares/error-handler";
-import { NotFoundError } from "./errors/not-found-error";
+import { errorHandler } from "@vg_node_micro_service_app/common";
+import { NotFoundError } from "@vg_node_micro_service_app/common";
 
 const app = express();
 app.set("trust proxy", true);

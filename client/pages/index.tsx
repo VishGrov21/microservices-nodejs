@@ -1,15 +1,16 @@
-import axios, { AxiosResponse } from "axios";
-import type { NextPage, NextPageContext } from "next";
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { AxiosErrorData } from "../hooks/useRequest";
 import styles from "../styles/Home.module.css";
+import { axiosInstance } from "../utils/axios";
 
 interface Props {
   data: AxiosResponse | AxiosErrorData;
+  currentUser: any;
 }
 
-const Home: NextPage<Props> = ({ data }) => {
+const Home: NextPage<Props> = ({ currentUser }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -18,20 +19,9 @@ const Home: NextPage<Props> = ({ data }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
-        <h1>Landing Page</h1>
-      </main>
+      <main>{currentUser ? <h1>You are signed In </h1> : <h1>You are not signed in</h1>}</main>
     </div>
   );
-};
-
-Home.getInitialProps = async () => {
-  try {
-    const response = await axios.get("/api/users/currentUser");
-    return response.data;
-  } catch (error) {
-    return error as AxiosErrorData;
-  }
 };
 
 export default Home;
